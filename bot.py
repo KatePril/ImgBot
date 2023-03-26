@@ -21,7 +21,7 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
 list_of_images = ['photo', 'image', 'picture', 'drawing', 'painting']
-categories = {'people' : ['people', 'person', 'family', 'coworker', 'co-worker', 'children', 'child', 'kid', 'student'], 'nature' : ['nature', 'environment', 'landscape', 'forest', 'exterior', 'lake', 'mountains'], 'space' : ['space', 'universe', 'star', 'sky', 'planet', 'galaxy', 'interstellar']}
+categories = {'people' : ['people', 'person', 'family', 'coworker', 'co-worker', 'children', 'child', 'kid', 'student', 'human'], 'nature' : ['nature', 'environment', 'landscape', 'forest', 'exterior', 'lake', 'mountains'], 'space' : ['space', 'universe', 'star', 'sky', 'planet', 'galaxy', 'interstellar']}
 
 def find_key_word(string, list):
     for word in list:
@@ -30,7 +30,7 @@ def find_key_word(string, list):
     return False
 
 def open_photo(category):
-    open(f'images/{category}/{randint(1, 15)}.jpg', 'rb')
+    return open(f'images/{category}/{randint(1, 15)}.jpg', 'rb')
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
@@ -48,14 +48,6 @@ async def echo(message: types.Message):
                 break
         else:
             await message.answer('Sorry, no images for your request')
-        # if find_key_word(message.text, categories['people']):
-        #     await message.answer_photo(open_photo('people'))
-        # elif find_key_word(message.text, categories['nature']):
-        #     await message.answer_photo(open_photo('nature'))
-        # elif find_key_word(message.text, categories['space']):
-        #     await message.answer_photo(open_photo('space'))
-        # else:
-        #     await message.answer('Sorry, no images for your request')
     else:
         await message.answer('Sorry, no images for your request')
  
